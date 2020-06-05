@@ -5,7 +5,7 @@ An example:
 <pre>
      T1     T2  T3  T4
 A 33 |------+---|
-B 44        |------|
+B 44        |---+--|
 
 Result: 
 
