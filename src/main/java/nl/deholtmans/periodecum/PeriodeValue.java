@@ -8,6 +8,7 @@ import java.util.List;
 // DTO
 public class PeriodeValue {
     private DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+    private static DateTimeFormatter staticFormatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
     public LocalDate    start;
     public LocalDate    einde;
     public double       value;
@@ -52,16 +53,17 @@ public class PeriodeValue {
     public List<PeriodeValue> split( PeriodeValue other) {
         List<PeriodeValue> periods = new ArrayList<>();
         if( other.start.isAfter( start) && leftisBeforeExcluding( other.start, einde)) {
-            periods.add( new PeriodeValue( start, other.start, value));
+            periods.add( new PeriodeValue( start, other.start.minusDays(1), value));
             if( other.einde.isAfter( start) && leftisBeforeExcluding( other.einde, einde)) {
                 periods.add(new PeriodeValue( other.start, other.einde, value));
-                periods.add(new PeriodeValue( other.einde, einde, value));
+                periods.add(new PeriodeValue( other.einde.plusDays(1), einde, value));
             } else {
                 periods.add(new PeriodeValue( other.start, einde, value));
             }
         } else if( other.einde.isAfter( start) && leftisBeforeExcluding( other.einde, einde)) {
             periods.add( new PeriodeValue( start, other.einde, value));
-            periods.add( new PeriodeValue( other.einde, einde, value));
+            //	periods.add( new PeriodeValue( other.einde, einde, value));
+            periods.add( new PeriodeValue( other.einde.plusDays(1), einde, value));
         } else {
             periods.add( this);
         }
@@ -70,12 +72,19 @@ public class PeriodeValue {
 
     // ? beter leesbare datumvergelijkingen + unit test
     public static boolean leftisAfterIncluding( LocalDate a, LocalDate b) {
+    	System.out.println(String.format("leftisAfterIncluding: date a: %s, date b: %s compare: %s", a.format(staticFormatter), b.format(staticFormatter), ! b.isAfter( a)));
         return ! b.isAfter( a);
     }
+    public static boolean leftisAfterExcluding( LocalDate a, LocalDate b) {
+    	System.out.println(String.format("leftisAfterExcluding: date a: %s, date b: %s compare: %s", a.format(staticFormatter), b.format(staticFormatter), a.isAfter( b)));
+        return a.isAfter( b);
+    }
     public static boolean leftisBeforeIncluding( LocalDate a, LocalDate b) {
+    	System.out.println(String.format("leftisBeforeIncluding: date a: %s, date b: %s compare: %s", a.format(staticFormatter), b.format(staticFormatter), ! b.isBefore( a)));
         return ! b.isBefore( a);
     }
     public static boolean leftisBeforeExcluding( LocalDate a, LocalDate b) {
+    	System.out.println(String.format("leftisBeforeExcluding: date a: %s, date b: %s compare: %s", a.format(staticFormatter), b.format(staticFormatter), a.isBefore( b)));
         return a.isBefore( b);
     }
 

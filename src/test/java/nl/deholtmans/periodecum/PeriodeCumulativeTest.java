@@ -123,6 +123,32 @@ public class PeriodeCumulativeTest {
          */
     }
 
+    // Step 6 - op het hoogste niveau
+    @Test
+    public void testBInsideA() {
+        PeriodeValue a = new PeriodeValue(LocalDate.of(2014, 1, 1), LocalDate.of(2015, 6, 30), 0.31);
+        PeriodeValue b = new PeriodeValue(LocalDate.of(2016, 1, 1), LocalDate.of(2018, 12, 31), 0.27);
+        PeriodeValue c = new PeriodeValue(LocalDate.of(2016, 2, 1), LocalDate.of(2018, 11, 30), 0.04);
+        PeriodeValue d = new PeriodeValue(LocalDate.of(2019, 1, 1), LocalDate.of(2019, 12, 31), 0.47);
+        List<PeriodeValue> periods = new ArrayList<>();
+        //	periods.add( a);
+        periods.add( b);
+        periods.add( c);
+        //	periods.add( d);
+        periods.forEach( p -> System.out.println( p));
+        List<PeriodeValue> cumulatedPeriods = getPeriodCumulatives( periods);
+        System.out.println( "Final result: ");
+        cumulatedPeriods.forEach( p -> System.out.println( p));
+        /*
+        PeriodeValue{start=06-06-2020, einde=07-06-2020, value=22.0}
+        PeriodeValue{start=07-06-2020, einde=08-06-2020, value=55.0}
+        PeriodeValue{start=08-06-2020, einde=09-06-2020, value=99.0}
+        PeriodeValue{start=09-06-2020, einde=10-06-2020, value=77.0}
+        PeriodeValue{start=10-06-2020, einde=11-06-2020, value=99.0}
+        PeriodeValue{start=11-06-2020, einde=12-06-2020, value=44.0}
+         */
+    }
+
     // Groudgrijp en haantjes
     // Step 7 - op het hoogste niveau
     @Test
@@ -170,4 +196,53 @@ public class PeriodeCumulativeTest {
             PeriodeValue{start=01-01-2019, einde=31-12-2019, value=0.47}
          */
     }
+    
+    // Groudgrijp en haantjes
+    // Step 7 - op het hoogste niveau
+    @Test
+    public void testGoudgrijp_Hermien() {
+
+        PeriodeValue a = new PeriodeValue(LocalDate.of(2014, 1, 1), LocalDate.of(2015, 6, 30), 0.31);
+        PeriodeValue c = new PeriodeValue(LocalDate.of(2016, 1, 1), LocalDate.of(2018, 12, 31), 0.27);
+        PeriodeValue b = new PeriodeValue(LocalDate.of(2016, 1, 1), LocalDate.of(2019, 12, 31), 0.04);
+        PeriodeValue d = new PeriodeValue(LocalDate.of(2019, 1, 1), LocalDate.of(2019, 12, 31), 0.47);
+        List<PeriodeValue> periods = new ArrayList<>();
+        periods.add( a);
+        periods.add( b);
+        periods.add( c);
+        periods.add( d);
+        periods.forEach( p -> System.out.println( p));
+        List<PeriodeValue> cumulatedPeriods = getPeriodCumulatives( periods);
+        System.out.println( "Goudgrijp result: ");
+        cumulatedPeriods.forEach( p -> System.out.println( p));
+
+        assertEquals( 3, cumulatedPeriods.size());
+        assertEquals( cumulatedPeriods.get( 0).value, a.value, 0.31);
+        assertTrue( cumulatedPeriods.get( 0).start.isEqual( a.start));
+        assertTrue( cumulatedPeriods.get( 0).einde.isEqual( a.einde));
+        assertEquals( cumulatedPeriods.get( 1).value, a.value, 0.31);
+        assertTrue( cumulatedPeriods.get( 1).start.isEqual( b.start));
+        assertTrue( cumulatedPeriods.get( 1).einde.isEqual( c.einde));
+        assertEquals( cumulatedPeriods.get( 2).value, a.value, 0.27);
+        assertTrue( cumulatedPeriods.get( 2).start.isEqual( c.einde));
+        assertTrue( cumulatedPeriods.get( 2).einde.isEqual( b.einde));
+        assertEquals( cumulatedPeriods.get( 3).value, a.value, 0.47);
+        assertTrue( cumulatedPeriods.get( 3).start.isEqual( d.start));
+        assertTrue( cumulatedPeriods.get( 3).einde.isEqual( d.einde));
+
+        /* Periode:
+            PeriodeValue{start=01-01-2014, einde=30-06-2015, value=0.31}
+            PeriodeValue{start=01-01-2016, einde=31-12-2018, value=0.27}
+            PeriodeValue{start=01-01-2016, einde=31-12-2016, value=0.04}
+            PeriodeValue{start=01-01-2019, einde=31-12-2019, value=0.47}
+         */
+
+        /* Waardes: cumulatief
+            PeriodeValue{start=01-01-2014, einde=30-06-2015, value=0.31}
+            PeriodeValue{start=01-01-2016, einde=31-12-2016, value=0.31}
+            PeriodeValue{start=31-12-2016, einde=31-12-2018, value=0.27}
+            PeriodeValue{start=01-01-2019, einde=31-12-2019, value=0.47}
+         */
+    }
+    
 }
