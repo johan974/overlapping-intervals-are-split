@@ -185,9 +185,43 @@ public class PeriodeValueTest {
     }
 
     @Test
-    public void testBinsideA() {
+    public void testAenBgelijk() {
+        PeriodeValue a = new PeriodeValue( LocalDate.of(2016, 1, 1), LocalDate.of(2016, 12, 31), 22);
+        PeriodeValue b = new PeriodeValue( LocalDate.of(2016, 1, 1), LocalDate.of(2016, 12, 31), 33);
+        List<PeriodeValue> aSplitInPeriodes = a.split( b);
+        aSplitInPeriodes.forEach( p -> System.out.println( p));
+        assertEquals( 1, aSplitInPeriodes.size());
+
+//        assertEquals( aSplitInPeriodes.get( 0).value, a.value, 0.01);
+//        assertTrue( aSplitInPeriodes.get( 0).start.isEqual( a.start));
+//        assertTrue( aSplitInPeriodes.get( 0).einde.isEqual( b.einde));
+//        assertEquals( aSplitInPeriodes.get( 1).value, a.value, 0.01);
+//        assertTrue( aSplitInPeriodes.get( 1).start.isEqual( b.einde));
+//        assertTrue( aSplitInPeriodes.get( 1).einde.isEqual( a.einde));
+        
+    }
+
+    @Test
+    public void testBStartAfterAAndEndsInside() {
         PeriodeValue a = new PeriodeValue( LocalDate.of(2016, 1, 1), LocalDate.of(2016, 12, 31), 22);
         PeriodeValue b = new PeriodeValue( LocalDate.of(2016, 2, 1), LocalDate.of(2016, 10, 31), 33);
+        List<PeriodeValue> aSplitInPeriodes = a.split( b);
+        aSplitInPeriodes.forEach( p -> System.out.println( p));
+        assertEquals( 3, aSplitInPeriodes.size());
+
+//        assertEquals( aSplitInPeriodes.get( 0).value, a.value, 0.01);
+//        assertTrue( aSplitInPeriodes.get( 0).start.isEqual( a.start));
+//        assertTrue( aSplitInPeriodes.get( 0).einde.isEqual( b.einde));
+//        assertEquals( aSplitInPeriodes.get( 1).value, a.value, 0.01);
+//        assertTrue( aSplitInPeriodes.get( 1).start.isEqual( b.einde));
+//        assertTrue( aSplitInPeriodes.get( 1).einde.isEqual( a.einde));
+        
+    }
+
+    @Test
+    public void testBStartAfterAAndEndsOutside() {
+        PeriodeValue a = new PeriodeValue( LocalDate.of(2016, 1, 1), LocalDate.of(2016, 12, 31), 22);
+        PeriodeValue b = new PeriodeValue( LocalDate.of(2016, 2, 1), LocalDate.of(2017, 12, 31), 33);
         List<PeriodeValue> aSplitInPeriodes = a.split( b);
         aSplitInPeriodes.forEach( p -> System.out.println( p));
         assertEquals( 2, aSplitInPeriodes.size());
@@ -199,11 +233,40 @@ public class PeriodeValueTest {
 //        assertTrue( aSplitInPeriodes.get( 1).start.isEqual( b.einde));
 //        assertTrue( aSplitInPeriodes.get( 1).einde.isEqual( a.einde));
         
-        System.out.println("\nReversed");
-        List<PeriodeValue> bSplitInPeriodes = b.split( a);
-        aSplitInPeriodes.forEach( p -> System.out.println( p));
-        assertEquals( 2, bSplitInPeriodes.size());
+    }
 
+    @Test
+    public void testBStartBeforeAAndEndsOutside() {
+        PeriodeValue a = new PeriodeValue( LocalDate.of(2016, 1, 1), LocalDate.of(2016, 12, 31), 22);
+        PeriodeValue b = new PeriodeValue( LocalDate.of(2015, 2, 1), LocalDate.of(2017, 10, 31), 33);
+        List<PeriodeValue> aSplitInPeriodes = a.split( b);
+        aSplitInPeriodes.forEach( p -> System.out.println( p));
+        assertEquals( 1, aSplitInPeriodes.size());
+
+//        assertEquals( aSplitInPeriodes.get( 0).value, a.value, 0.01);
+//        assertTrue( aSplitInPeriodes.get( 0).start.isEqual( a.start));
+//        assertTrue( aSplitInPeriodes.get( 0).einde.isEqual( b.einde));
+//        assertEquals( aSplitInPeriodes.get( 1).value, a.value, 0.01);
+//        assertTrue( aSplitInPeriodes.get( 1).start.isEqual( b.einde));
+//        assertTrue( aSplitInPeriodes.get( 1).einde.isEqual( a.einde));
+        
+    }
+
+    @Test
+    public void testBStartBeforeAAndEndsInside() {
+        PeriodeValue a = new PeriodeValue( LocalDate.of(2016, 1, 1), LocalDate.of(2017, 12, 31), 22);
+        PeriodeValue b = new PeriodeValue( LocalDate.of(2015, 1, 1), LocalDate.of(2016, 12, 31), 33);
+        List<PeriodeValue> aSplitInPeriodes = a.split( b);
+        aSplitInPeriodes.forEach( p -> System.out.println( p));
+        assertEquals( 2, aSplitInPeriodes.size());
+
+//        assertEquals( aSplitInPeriodes.get( 0).value, a.value, 0.01);
+//        assertTrue( aSplitInPeriodes.get( 0).start.isEqual( a.start));
+//        assertTrue( aSplitInPeriodes.get( 0).einde.isEqual( b.einde));
+//        assertEquals( aSplitInPeriodes.get( 1).value, a.value, 0.01);
+//        assertTrue( aSplitInPeriodes.get( 1).start.isEqual( b.einde));
+//        assertTrue( aSplitInPeriodes.get( 1).einde.isEqual( a.einde));
+        
     }
 
     @Test
