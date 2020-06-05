@@ -6,7 +6,7 @@ import java.util.List;
 
 public class PeriodeCumulative {
 
-    // Stap 7 - Alles samenvoegen
+    // Stap 6 - Alles samenvoegen
     public static List<PeriodeValue> getPeriodCumulatives(List<PeriodeValue> periodeValues) {
         List<PeriodeValue> cumulatedPeriodValues = new ArrayList<>();
         if (periodeValues == null || periodeValues.isEmpty()) {
@@ -17,7 +17,7 @@ public class PeriodeCumulative {
         return cumulateIntervals( splitPeriodsList);
     }
 
-    // Stap 4 - splits alle periodes via de andere periode
+    // Step 3 - split all periodes via all other periods
     public static List<PeriodeValue> getIntersectingPeriodes(List<PeriodeValue> periodeValues) {
         List<PeriodeValue> cumulatedValues = new ArrayList<>();
         if (periodeValues == null || periodeValues.isEmpty()) {
@@ -34,7 +34,7 @@ public class PeriodeCumulative {
         }
         return cumulatedValues;
     }
-    // Stap 5 - sorteer de periodes
+    // Stap 4 - sorteer de periodes
     public static void sortIntervals( List<PeriodeValue> aListToBeSorted) {
         Collections.sort(aListToBeSorted, (o1, o2) -> {
             if( ((PeriodeValue) o1).start.isBefore( ((PeriodeValue) o2).start)) {
@@ -47,7 +47,7 @@ public class PeriodeCumulative {
         });
     }
 
-    // Stap 6 - bereken de cumulatieve waarden
+    // Stap 5 - bereken de cumulatieve waarden
     public static List<PeriodeValue> cumulateIntervals( List<PeriodeValue> sortedPeriodsToBeCumulated) {
         List<PeriodeValue> cumulatedValuesPerPeriod = new ArrayList<>();
         for( PeriodeValue periodeValue : sortedPeriodsToBeCumulated) {

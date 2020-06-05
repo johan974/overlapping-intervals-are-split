@@ -27,7 +27,7 @@ public class PeriodeValue {
         return true;
     }
 
-    // Stap 3 - splits in periode o.b.v. een serie andere periodes
+    // Stap 2 - splits in periode o.b.v. een serie andere periodes
     public List<PeriodeValue> split( List<PeriodeValue> otherPeriods) {
         List<PeriodeValue> originalList = new ArrayList<>();
         originalList.add( this);
@@ -48,7 +48,7 @@ public class PeriodeValue {
         return originalList;
     }
 
-    // Stap 2 - splits 1 periode interval o.b.v. een 'andere' (other) + unit test
+    // Step 1 - splits 1 periode interval o.b.v. een 'andere' (other) + unit test
     public List<PeriodeValue> split( PeriodeValue other) {
         List<PeriodeValue> periods = new ArrayList<>();
         if( other.start.isAfter( start) && leftisBeforeExcluding( other.start, einde)) {
@@ -68,7 +68,7 @@ public class PeriodeValue {
         return periods;
     }
 
-    // Stap 1 - beter leesbare datumvergelijkingen + unit test
+    // ? beter leesbare datumvergelijkingen + unit test
     public static boolean leftisAfterIncluding( LocalDate a, LocalDate b) {
         return ! b.isAfter( a);
     }

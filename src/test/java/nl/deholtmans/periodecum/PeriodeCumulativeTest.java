@@ -13,6 +13,7 @@ import static nl.deholtmans.periodecum.PeriodeCumulative.sortIntervals;
 import static org.junit.Assert.*;
 
 public class PeriodeCumulativeTest {
+    // Step 3
     @Test
     public void testPeriodsHavingIntersections() {
         PeriodeValue a = new PeriodeValue( LocalDate.now().plusDays( 1), LocalDate.now().plusDays( 4), 22);
@@ -63,7 +64,7 @@ public class PeriodeCumulativeTest {
         */
     }
 
-    // Stap 5 - sort intervals
+    // Stap 4 - sort intervals
     @Test
     public void testSortIntervals() {
         PeriodeValue d = new PeriodeValue(LocalDate.now().plusDays(1), LocalDate.now().plusDays(4), 22);
@@ -94,9 +95,9 @@ public class PeriodeCumulativeTest {
         periods.forEach( p -> System.out.println( p));
     }
 
-    // Stap 6 - nog te testen
+    // Stap 5 - nog te testen
 
-    // Stap 7 - op het hoogste niveau
+    // Step 6 - op het hoogste niveau
     @Test
     public void testCumulatedPeriodValues() {
         PeriodeValue a = new PeriodeValue(LocalDate.now().plusDays(1), LocalDate.now().plusDays(4), 22);
