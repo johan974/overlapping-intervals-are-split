@@ -94,7 +94,6 @@ public class PeriodeCumulative {
         		
         		if (i == periodeValues.size() - 2) {
             		mergedValues.add(leftPeriod);
-            		// This is not Ok
         		}
         	}
         }
