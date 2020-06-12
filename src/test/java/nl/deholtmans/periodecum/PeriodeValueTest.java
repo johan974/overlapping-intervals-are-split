@@ -435,21 +435,21 @@ public class PeriodeValueTest {
 	public void testIsSubsequentPeriodNextDay() {
 		PeriodeValue a = new PeriodeValue(LocalDate.of(2016, 1, 1), LocalDate.of(2017, 12, 31), 33);
 		PeriodeValue b = new PeriodeValue(LocalDate.of(2018, 1, 1), LocalDate.of(2018, 12, 31), 33);
-		assertTrue(a.isSubsequentPeriod(b));
+		assertTrue(a.hasSubsequentPeriod(b));
 	}
 
 	@Test
 	public void testIsSubsequentPeriodSameDay() {
 		PeriodeValue a = new PeriodeValue(LocalDate.of(2016, 1, 1), LocalDate.of(2017, 12, 31), 33);
 		PeriodeValue b = new PeriodeValue(LocalDate.of(2017, 12, 31), LocalDate.of(2018, 12, 31), 33);
-		assertFalse(a.isSubsequentPeriod(b));
+		assertFalse(a.hasSubsequentPeriod(b));
 	}
 
 	@Test
 	public void testIsSubsequentPeriodPrevDay() {
 		PeriodeValue a = new PeriodeValue(LocalDate.of(2016, 1, 1), LocalDate.of(2017, 12, 31), 33);
 		PeriodeValue b = new PeriodeValue(LocalDate.of(2017, 12, 30), LocalDate.of(2018, 12, 31), 33);
-		assertFalse(a.isSubsequentPeriod(b));
+		assertFalse(a.hasSubsequentPeriod(b));
 	}
 
 	@Test
@@ -458,10 +458,10 @@ public class PeriodeValueTest {
 		PeriodeValue b = new PeriodeValue(LocalDate.of(2018, 1, 1), LocalDate.of(2018, 12, 31), 33);
 
 		System.out.println("Before: " + a);
-		a.merge(b);
-		System.out.println("After: " + a);
+		PeriodeValue c = a.merge(b);
+		System.out.println("After: " + c);
 
-		assertTrue(a.einde.isEqual(b.einde));
+		assertTrue(c.einde.isEqual(b.einde));
 
 	}
 
@@ -471,10 +471,10 @@ public class PeriodeValueTest {
 		PeriodeValue b = new PeriodeValue(LocalDate.of(2017, 12, 31), LocalDate.of(2018, 12, 31), 33);
 
 		System.out.println("Before: " + a);
-		a.merge(b);
-		System.out.println("After: " + a);
+		PeriodeValue c = a.merge(b);
+		System.out.println("After: " + c);
 
-		assertFalse(a.einde.isEqual(b.einde));
+		assertFalse(c.einde.isEqual(b.einde));
 	}
 
 	@Test
@@ -483,10 +483,10 @@ public class PeriodeValueTest {
 		PeriodeValue b = new PeriodeValue(LocalDate.of(2017, 12, 30), LocalDate.of(2018, 12, 31), 33);
 
 		System.out.println("Before: " + a);
-		a.merge(b);
-		System.out.println("After: " + a);
+		PeriodeValue c = a.merge(b);
+		System.out.println("After: " + c);
 
-		assertFalse(a.einde.isEqual(b.einde));
+		assertFalse(c.einde.isEqual(b.einde));
 	}
 
 }
