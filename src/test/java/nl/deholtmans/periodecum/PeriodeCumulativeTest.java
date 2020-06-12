@@ -245,4 +245,87 @@ public class PeriodeCumulativeTest {
          */
     }
     
+    // Groudgrijp en haantjes
+    // Step 7 - op het hoogste niveau
+    @Test
+    public void testFerry() {
+
+        PeriodeValue a = new PeriodeValue(LocalDate.of(2015, 1, 1), LocalDate.of(2017, 12, 31), 0.50);
+        PeriodeValue b = new PeriodeValue(LocalDate.of(2016, 1, 1), LocalDate.of(2018, 12, 31), 0.25);
+        List<PeriodeValue> periods = new ArrayList<>();
+        periods.add( a);
+        periods.add( b);
+//        periods.add( c);
+//        periods.add( d);
+        periods.forEach( p -> System.out.println( p));
+        List<PeriodeValue> cumulatedPeriods = getPeriodCumulatives( periods);
+        System.out.println( "Goudgrijp result: ");
+        cumulatedPeriods.forEach( p -> System.out.println( p));
+
+//        assertEquals( 3, cumulatedPeriods.size());
+//        assertEquals( cumulatedPeriods.get( 0).value, a.value, 0.31);
+//        assertTrue( cumulatedPeriods.get( 0).start.isEqual( a.start));
+//        assertTrue( cumulatedPeriods.get( 0).einde.isEqual( a.einde));
+//        assertEquals( cumulatedPeriods.get( 1).value, a.value, 0.31);
+//        assertTrue( cumulatedPeriods.get( 1).start.isEqual( b.start));
+//        assertTrue( cumulatedPeriods.get( 1).einde.isEqual( c.einde));
+//        assertEquals( cumulatedPeriods.get( 2).value, a.value, 0.27);
+//        assertTrue( cumulatedPeriods.get( 2).start.isEqual( c.einde));
+//        assertTrue( cumulatedPeriods.get( 2).einde.isEqual( b.einde));
+//        assertEquals( cumulatedPeriods.get( 3).value, a.value, 0.47);
+//        assertTrue( cumulatedPeriods.get( 3).start.isEqual( d.start));
+//        assertTrue( cumulatedPeriods.get( 3).einde.isEqual( d.einde));
+
+        /* Periode:
+            PeriodeValue{start=01-01-2014, einde=30-06-2015, value=0.31}
+            PeriodeValue{start=01-01-2016, einde=31-12-2018, value=0.27}
+            PeriodeValue{start=01-01-2016, einde=31-12-2016, value=0.04}
+            PeriodeValue{start=01-01-2019, einde=31-12-2019, value=0.47}
+         */
+
+        /* Waardes: cumulatief
+            PeriodeValue{start=01-01-2014, einde=30-06-2015, value=0.31}
+            PeriodeValue{start=01-01-2016, einde=31-12-2016, value=0.31}
+            PeriodeValue{start=31-12-2016, einde=31-12-2018, value=0.27}
+            PeriodeValue{start=01-01-2019, einde=31-12-2019, value=0.47}
+         */
+    }
+    
+    // Groudgrijp en haantjes
+    // Step 7 - op het hoogste niveau
+    @Test
+    public void TestThreeDays() {
+
+        PeriodeValue a = new PeriodeValue( LocalDate.now().plusDays( 1), LocalDate.now().plusDays( 4), 22);
+        PeriodeValue b = new PeriodeValue( LocalDate.now().plusDays( 2), LocalDate.now().plusDays( 5), 33);
+        PeriodeValue c = new PeriodeValue( LocalDate.now().plusDays( 3), LocalDate.now().plusDays( 6), 44);
+        List<PeriodeValue> periods = new ArrayList<>();
+        periods.add( a);
+        periods.add( b);
+        periods.add( c);
+//        periods.add( d);
+        periods.forEach( p -> System.out.println( p));
+        List<PeriodeValue> cumulatedPeriods = getPeriodCumulatives( periods);
+        System.out.println( "Goudgrijp result: ");
+        cumulatedPeriods.forEach( p -> System.out.println( p));
+
+//        assertEquals( 3, cumulatedPeriods.size());
+
+        /* Periode:
+            PeriodeValue{start=01-01-2014, einde=30-06-2015, value=0.31}
+            PeriodeValue{start=01-01-2016, einde=31-12-2018, value=0.27}
+            PeriodeValue{start=01-01-2016, einde=31-12-2016, value=0.04}
+            PeriodeValue{start=01-01-2019, einde=31-12-2019, value=0.47}
+         */
+
+        /* Waardes: cumulatief
+            PeriodeValue{start=01-01-2014, einde=30-06-2015, value=0.31}
+            PeriodeValue{start=01-01-2016, einde=31-12-2016, value=0.31}
+            PeriodeValue{start=31-12-2016, einde=31-12-2018, value=0.27}
+            PeriodeValue{start=01-01-2019, einde=31-12-2019, value=0.47}
+         */
+    }
+    
+     
+    
 }

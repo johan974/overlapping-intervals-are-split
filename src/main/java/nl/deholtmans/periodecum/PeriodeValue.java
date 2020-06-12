@@ -70,6 +70,14 @@ public class PeriodeValue {
         return periods;
     }
 
+    //	Merge two periodic values when they are subsequent
+    public void merge ( PeriodeValue other) {
+    	//	PeriodeValue periodeValue = new PeriodeValue(this.start, other.einde, this.value);
+    	if (this.isSubsequentPeriod(other)) {
+    		this.einde = other.einde;
+    	}
+    }
+    
     // ? beter leesbare datumvergelijkingen + unit test
     public static boolean leftisAfterIncluding( LocalDate a, LocalDate b) {
     	System.out.println(String.format("leftisAfterIncluding: date a: %s, date b: %s compare: %s", a.format(staticFormatter), b.format(staticFormatter), ! b.isAfter( a)));
@@ -87,6 +95,16 @@ public class PeriodeValue {
     	System.out.println(String.format("leftisBeforeExcluding: date a: %s, date b: %s compare: %s", a.format(staticFormatter), b.format(staticFormatter), a.isBefore( b)));
         return a.isBefore( b);
     }
+    
+    public boolean isSubsequentPeriod(PeriodeValue other) {
+    	System.out.println(String.format("Subsequent dates: %s %s = %s", this.einde, other.start, (this.einde.plusDays(1).isEqual(other.start))));
+    	if ( (this.einde.plusDays(1).isEqual(other.start)) && ( (this.value - other.value) < 0.001 ) ) {
+    		return true;
+    	}
+    	
+    	return false;
+    }
+    
 
     private String formatDate( LocalDate date) {
         return date.format( formatter);
