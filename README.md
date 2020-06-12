@@ -78,4 +78,4 @@ Cumulate all sorted periods, see PeriodeCumulative.cumulateIntervals( List<Perio
 Final result: step 4 + step 5 + step 6, see PeriodeCumulative.getPeriodCumulatives(List<PeriodeValue> periodeValues)
      
 Finito (for pull request)
-Second pull request
+Second pull request. Nu de datum toegevoeg: 01-01-2020
