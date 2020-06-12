@@ -24,7 +24,7 @@ public class PeriodeCumulativeTest {
         List<PeriodeValue> periodeValueList = Arrays.asList( a, b, c, d);
         List<PeriodeValue> splitPeriods = getIntersectingPeriodes( periodeValueList);
         splitPeriods.forEach( p -> System.out.println( p));
-        assertEquals( 11, splitPeriods.size());
+        assertEquals( 10, splitPeriods.size());
        /*
         PeriodeValue{start=06-06-2020, einde=07-06-2020, value=22.0}
         PeriodeValue{start=07-06-2020, einde=08-06-2020, value=22.0}
@@ -152,24 +152,23 @@ public class PeriodeCumulativeTest {
         assertTrue( cumulatedPeriods.get( 1).start.isEqual( b.start));
         assertTrue( cumulatedPeriods.get( 1).einde.isEqual( c.einde));
         assertEquals( cumulatedPeriods.get( 2).value, a.value, 0.27);
-        assertTrue( cumulatedPeriods.get( 2).start.isEqual( c.einde));
+        assertTrue( cumulatedPeriods.get( 2).start.isEqual( c.einde.plusDays(1)));
         assertTrue( cumulatedPeriods.get( 2).einde.isEqual( b.einde));
         assertEquals( cumulatedPeriods.get( 3).value, a.value, 0.47);
         assertTrue( cumulatedPeriods.get( 3).start.isEqual( d.start));
         assertTrue( cumulatedPeriods.get( 3).einde.isEqual( d.einde));
 
         /* Periode:
-            PeriodeValue{start=01-01-2014, einde=30-06-2015, value=0.31}
-            PeriodeValue{start=01-01-2016, einde=31-12-2018, value=0.27}
-            PeriodeValue{start=01-01-2016, einde=31-12-2016, value=0.04}
-            PeriodeValue{start=01-01-2019, einde=31-12-2019, value=0.47}
-         */
+				PeriodeValue{start=01-01-2014, einde=30-06-2015, value=0.31}
+				PeriodeValue{start=01-01-2016, einde=31-12-2018, value=0.27}
+				PeriodeValue{start=01-01-2016, einde=31-12-2016, value=0.04}
+				PeriodeValue{start=01-01-2019, einde=31-12-2019, value=0.47}
 
-        /* Waardes: cumulatief
-            PeriodeValue{start=01-01-2014, einde=30-06-2015, value=0.31}
-            PeriodeValue{start=01-01-2016, einde=31-12-2016, value=0.31}
-            PeriodeValue{start=31-12-2016, einde=31-12-2018, value=0.27}
-            PeriodeValue{start=01-01-2019, einde=31-12-2019, value=0.47}
+				Goudgrijp result: 
+				PeriodeValue{start=01-01-2014, einde=30-06-2015, value=0.31}
+				PeriodeValue{start=01-01-2016, einde=31-12-2016, value=0.31}
+				PeriodeValue{start=01-01-2017, einde=31-12-2018, value=0.27}
+				PeriodeValue{start=01-01-2019, einde=31-12-2019, value=0.47}
          */
     }
     
