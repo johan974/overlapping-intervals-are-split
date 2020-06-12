@@ -76,3 +76,5 @@ Cumulate all sorted periods, see PeriodeCumulative.cumulateIntervals( List<Perio
 # Step 6
 
 Final result: step 4 + step 5 + step 6, see PeriodeCumulative.getPeriodCumulatives(List<PeriodeValue> periodeValues)
+     
+Finito (for pull request)
