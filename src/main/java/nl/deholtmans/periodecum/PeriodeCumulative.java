@@ -100,4 +100,8 @@ public class PeriodeCumulative {
         return mergedValues;
     }
     
+    public static void print() {
+    	System.out.println("Hello Johan");
+    	
+    }
 }
