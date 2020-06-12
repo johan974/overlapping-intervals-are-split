@@ -74,4 +74,30 @@ public class PeriodeCumulative {
         }
         return null;
     }
+    
+    // Step 3 - split all periodes via all other periods
+    public static List<PeriodeValue> getPeriodesMerged(List<PeriodeValue> periodeValues) {
+        List<PeriodeValue> mergedValues = new ArrayList<>();
+        if (periodeValues == null || periodeValues.isEmpty()) {
+            return mergedValues;
+        }
+        PeriodeValue leftPeriod = periodeValues.get(0);
+        PeriodeValue rightPeriod = null;
+        for (int i = 0; i < periodeValues.size() - 1; i++) {
+        	rightPeriod  = periodeValues.get(i + 1);
+        	
+        	if (leftPeriod.hasSubsequentPeriod(rightPeriod)) {
+        		leftPeriod = leftPeriod.merge(rightPeriod);
+        	} else {
+        		mergedValues.add(leftPeriod);
+        		leftPeriod = rightPeriod;
+        		
+        		if (i == periodeValues.size() - 2) {
+            		mergedValues.add(leftPeriod);
+        		}
+        	}
+        }
+        return mergedValues;
+    }
+    
 }
