@@ -92,10 +92,11 @@ public class PeriodeCumulative {
         		mergedValues.add(leftPeriod);
         		leftPeriod = rightPeriod;
         		
-        		if (i == periodeValues.size() - 2) {
-            		mergedValues.add(leftPeriod);
-        		}
         	}
+
+        	if (i == periodeValues.size() - 2) {
+        		mergedValues.add(leftPeriod);
+    		}
         }
         return mergedValues;
     }
