@@ -54,17 +54,17 @@ public class PeriodeValue {
 	public List<PeriodeValue> split(PeriodeValue other) {
 		List<PeriodeValue> periods = new ArrayList<>();
 		if (other.start.isAfter(start) && leftisBeforeExcluding(other.start, einde)) {
-			periods.add(new PeriodeValue(start, other.start.minusDays(1), value));
+			periods.add(new PeriodeValue(start, other.start, value));
 			if (other.einde.isAfter(start) && leftisBeforeExcluding(other.einde, einde)) {
 				periods.add(new PeriodeValue(other.start, other.einde, value));
-				periods.add(new PeriodeValue(other.einde.plusDays(1), einde, value));
+				periods.add(new PeriodeValue(other.einde, einde, value));
 			} else {
 				periods.add(new PeriodeValue(other.start, einde, value));
 			}
 		} else if (other.einde.isAfter(start) && leftisBeforeExcluding(other.einde, einde)) {
 			periods.add(new PeriodeValue(start, other.einde, value));
 			// periods.add( new PeriodeValue( other.einde, einde, value));
-			periods.add(new PeriodeValue(other.einde.plusDays(1), einde, value));
+			periods.add(new PeriodeValue(other.einde, einde, value));
 		} else {
 			periods.add(this);
 		}

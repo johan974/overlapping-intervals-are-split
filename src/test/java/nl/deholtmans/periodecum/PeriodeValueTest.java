@@ -165,7 +165,7 @@ public class PeriodeValueTest {
 		assertTrue(aSplitInPeriodes.get(0).einde.isEqual(b.einde));
 		assertEquals(aSplitInPeriodes.get(1).value, a.value, 0.01);
 
-		assertTrue(aSplitInPeriodes.get(1).start.isEqual(b.einde.plusDays(1)));
+		assertTrue(aSplitInPeriodes.get(1).start.isEqual(b.einde));
 		assertTrue(aSplitInPeriodes.get(1).einde.isEqual(a.einde));
 	}
 
@@ -180,7 +180,7 @@ public class PeriodeValueTest {
 		assertTrue(aSplitInPeriodes.get(0).start.isEqual(a.start));
 		assertTrue(aSplitInPeriodes.get(0).einde.isEqual(b.einde));
 		assertEquals(aSplitInPeriodes.get(1).value, a.value, 22);
-		assertFalse(aSplitInPeriodes.get(1).start.isEqual(b.einde));
+		assertTrue(aSplitInPeriodes.get(1).start.isEqual(b.einde));
 		assertTrue(aSplitInPeriodes.get(1).einde.isEqual(a.einde));
 	}
 
@@ -292,7 +292,7 @@ public class PeriodeValueTest {
 		assertEquals(2, aSplitInPeriodes.size());
 		assertEquals(aSplitInPeriodes.get(0).value, a.value, 0.01);
 		assertTrue(aSplitInPeriodes.get(0).start.isEqual(a.start));
-		assertTrue(aSplitInPeriodes.get(0).einde.isEqual(b.start.minusDays(1)));
+		assertTrue(aSplitInPeriodes.get(0).einde.isEqual(b.start));
 		assertEquals(aSplitInPeriodes.get(1).value, a.value, 0.01);
 		assertTrue(aSplitInPeriodes.get(1).start.isEqual(b.start));
 		assertTrue(aSplitInPeriodes.get(1).einde.isEqual(a.einde));
@@ -321,7 +321,7 @@ public class PeriodeValueTest {
 		assertEquals(2, aSplitInPeriodes.size());
 		assertEquals(aSplitInPeriodes.get(0).value, a.value, 0.01);
 		assertTrue(aSplitInPeriodes.get(0).start.isEqual(a.start));
-		assertTrue(aSplitInPeriodes.get(0).einde.plusDays(1).isEqual(b.start));
+		assertTrue(aSplitInPeriodes.get(0).einde.isEqual(b.start));
 		assertEquals(aSplitInPeriodes.get(1).value, a.value, 0.01);
 		assertTrue(aSplitInPeriodes.get(1).start.isEqual(b.start));
 		assertTrue(aSplitInPeriodes.get(1).einde.isEqual(a.einde));
@@ -352,7 +352,7 @@ public class PeriodeValueTest {
 		assertTrue(aSplitInPeriodes.get(0).start.isEqual(a.start));
 		assertTrue(aSplitInPeriodes.get(0).einde.isEqual(b.einde));
 		assertEquals(aSplitInPeriodes.get(1).value, a.value, 0.01);
-		assertTrue(aSplitInPeriodes.get(1).start.minusDays(1).isEqual(b.einde));
+		assertTrue(aSplitInPeriodes.get(1).start.isEqual(b.einde));
 		assertTrue(aSplitInPeriodes.get(1).einde.isEqual(a.einde));
 	}
 
@@ -379,7 +379,7 @@ public class PeriodeValueTest {
 		assertEquals(3, aSplitInPeriodes.size());
 		assertEquals(aSplitInPeriodes.get(0).value, a.value, 0.01);
 		assertTrue(aSplitInPeriodes.get(0).start.isEqual(a.start));
-		assertTrue(aSplitInPeriodes.get(0).einde.plusDays(1).isEqual(b.start));
+		assertTrue(aSplitInPeriodes.get(0).einde.isEqual(b.start));
 
 		assertEquals(aSplitInPeriodes.get(1).value, a.value, 0.01);
 		assertTrue(aSplitInPeriodes.get(1).start.isEqual(b.start));
@@ -404,10 +404,10 @@ public class PeriodeValueTest {
 		assertEquals(3, aSplitInPeriodes.size());
 		assertEquals(aSplitInPeriodes.get(0).value, a.value, 22);
 		assertTrue(aSplitInPeriodes.get(0).start.isEqual(a.start));
-		assertTrue(aSplitInPeriodes.get(0).einde.plusDays(1).isEqual(b.start));
+		assertTrue(aSplitInPeriodes.get(0).einde.isEqual(b.start));
 		assertEquals(aSplitInPeriodes.get(1).value, a.value, 33);
 		assertTrue(aSplitInPeriodes.get(1).start.isEqual(b.start));
-		assertTrue(aSplitInPeriodes.get(1).einde.plusDays(1).isEqual(c.start));
+		assertTrue(aSplitInPeriodes.get(1).einde.isEqual(c.start));
 		assertEquals(aSplitInPeriodes.get(2).value, a.value, 22);
 		assertTrue(aSplitInPeriodes.get(2).start.isEqual(c.start));
 		assertTrue(aSplitInPeriodes.get(2).einde.isEqual(a.einde));
@@ -457,7 +457,8 @@ public class PeriodeValueTest {
 		PeriodeValue a = new PeriodeValue(LocalDate.of(2016, 1, 1), LocalDate.of(2017, 12, 31), 33);
 		PeriodeValue b = new PeriodeValue(LocalDate.of(2018, 1, 1), LocalDate.of(2018, 12, 31), 33);
 
-		System.out.println("Before: " + a);
+		System.out.println("Before: a" + a);
+		System.out.println("Before: b" + b);
 		PeriodeValue c = a.merge(b);
 		System.out.println("After: " + c);
 
