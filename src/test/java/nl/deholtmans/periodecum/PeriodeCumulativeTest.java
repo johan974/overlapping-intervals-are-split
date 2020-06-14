@@ -24,7 +24,7 @@ public class PeriodeCumulativeTest {
         List<PeriodeValue> periodeValueList = Arrays.asList( a, b, c, d);
         List<PeriodeValue> splitPeriods = getIntersectingPeriodes( periodeValueList);
         splitPeriods.forEach( p -> System.out.println( p));
-        assertEquals( 10, splitPeriods.size());
+        assertEquals( 11, splitPeriods.size());
        /*
         PeriodeValue{start=06-06-2020, einde=07-06-2020, value=22.0}
         PeriodeValue{start=07-06-2020, einde=08-06-2020, value=22.0}
@@ -152,7 +152,7 @@ public class PeriodeCumulativeTest {
         assertTrue( cumulatedPeriods.get( 1).start.isEqual( b.start));
         assertTrue( cumulatedPeriods.get( 1).einde.isEqual( c.einde));
         assertEquals( cumulatedPeriods.get( 2).value, a.value, 0.27);
-        assertTrue( cumulatedPeriods.get( 2).start.isEqual( c.einde.plusDays(1)));
+        assertTrue( cumulatedPeriods.get( 2).start.isEqual( c.einde));
         assertTrue( cumulatedPeriods.get( 2).einde.isEqual( b.einde));
         assertEquals( cumulatedPeriods.get( 3).value, a.value, 0.47);
         assertTrue( cumulatedPeriods.get( 3).start.isEqual( d.start));
@@ -180,7 +180,7 @@ public class PeriodeCumulativeTest {
         PeriodeValue a = new PeriodeValue(LocalDate.of(2014, 1, 1), LocalDate.of(2015, 6, 30), 0.31);
         PeriodeValue c = new PeriodeValue(LocalDate.of(2016, 1, 1), LocalDate.of(2018, 12, 31), 0.27);
         PeriodeValue b = new PeriodeValue(LocalDate.of(2016, 1, 1), LocalDate.of(2019, 12, 31), 0.04);
-        PeriodeValue d = new PeriodeValue(LocalDate.of(2019, 1, 1), LocalDate.of(2019, 12, 31), 0.47);
+        PeriodeValue d = new PeriodeValue(LocalDate.of(2018, 12, 31), LocalDate.of(2019, 12, 31), 0.47);
         List<PeriodeValue> periods = new ArrayList<>();
         periods.add( a);
         periods.add( b);
@@ -199,7 +199,7 @@ public class PeriodeCumulativeTest {
         assertTrue( cumulatedPeriods.get( 1).start.isEqual( b.start));
         assertTrue( cumulatedPeriods.get( 1).einde.isEqual( c.einde));
         assertEquals( cumulatedPeriods.get( 2).value, a.value, 0.27);
-        assertTrue( cumulatedPeriods.get( 2).start.isEqual( c.einde.plusDays(1)));
+        assertTrue( cumulatedPeriods.get( 2).start.isEqual( c.einde));
         assertTrue( cumulatedPeriods.get( 2).einde.isEqual( b.einde));
 
         /* Periode:
@@ -629,7 +629,7 @@ public class PeriodeCumulativeTest {
         PeriodeValue a = new PeriodeValue(LocalDate.of(2014, 1, 1), LocalDate.of(2015, 6, 30), 0.31);
         PeriodeValue c = new PeriodeValue(LocalDate.of(2016, 1, 1), LocalDate.of(2018, 12, 31), 0.27);
         PeriodeValue b = new PeriodeValue(LocalDate.of(2016, 1, 1), LocalDate.of(2019, 12, 31), 0.04);
-        PeriodeValue d = new PeriodeValue(LocalDate.of(2019, 1, 1), LocalDate.of(2019, 12, 31), 0.27);
+        PeriodeValue d = new PeriodeValue(LocalDate.of(2018, 12, 31), LocalDate.of(2019, 12, 31), 0.27);
         List<PeriodeValue> periods = new ArrayList<>();
         periods.add( a);
         periods.add( b);
@@ -653,7 +653,7 @@ public class PeriodeCumulativeTest {
         assertTrue( cumulatedPeriods.get( 1).start.isEqual( b.start));
         assertTrue( cumulatedPeriods.get( 1).einde.isEqual( c.einde));
         assertEquals( cumulatedPeriods.get( 2).value, a.value, 0.27);
-        assertTrue( cumulatedPeriods.get( 2).start.isEqual( c.einde.plusDays(1)));
+        assertTrue( cumulatedPeriods.get( 2).start.isEqual( c.einde));
         assertTrue( cumulatedPeriods.get( 2).einde.isEqual( b.einde));
 
         /* Periode:

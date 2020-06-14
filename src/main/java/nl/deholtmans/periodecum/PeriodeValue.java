@@ -105,7 +105,10 @@ public class PeriodeValue {
 //		System.out.println(String.format("Subsequent dates: %s %s %f %f; days are equal %s; all is equal: %s", this.einde,
 //				other.start, this.value, other.value, (this.einde.plusDays(1).isEqual(other.start)),
 //				((this.einde.plusDays(1).isEqual(other.start)) && (Math.abs(this.value - other.value) < 0.001))));
-		if ((this.einde.plusDays(1).isEqual(other.start)) && (Math.abs(this.value - other.value) < 0.001)) {
+		if (
+				( (this.einde.isEqual(other.start)) || (this.einde.plusDays(1).isEqual(other.start) )
+						) 
+				&& (Math.abs(this.value - other.value) < 0.001)) {
 			return true;
 		}
 
