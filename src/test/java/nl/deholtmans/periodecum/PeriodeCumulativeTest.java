@@ -409,7 +409,7 @@ public class PeriodeCumulativeTest {
     public void testMergeSubsequentPeriodsOneAndTwoEqualAndValueEqual() {
 
         PeriodeValue a = new PeriodeValue(LocalDate.of(2015, 1, 1), LocalDate.of(2017, 12, 31), 0.50);
-        PeriodeValue b = new PeriodeValue(LocalDate.of(2018, 1, 1), LocalDate.of(2019, 12, 31), 0.50);
+        PeriodeValue b = new PeriodeValue(LocalDate.of(2017, 12, 31), LocalDate.of(2019, 12, 31), 0.50);
         PeriodeValue c = new PeriodeValue(LocalDate.of(2020, 1, 2), LocalDate.of(2020, 12, 31), 0.35);
         PeriodeValue d = new PeriodeValue(LocalDate.of(2021, 1, 2), LocalDate.of(2021, 12, 31), 0.15);
         List<PeriodeValue> periods = new ArrayList<>();
@@ -455,9 +455,9 @@ public class PeriodeCumulativeTest {
     public void testMergeSubsequentPeriodsOneAndTwoEqualAndValueEqualAndThreeAndFourDatesEqualButValueUnequal() {
 
         PeriodeValue a = new PeriodeValue(LocalDate.of(2015, 1, 1), LocalDate.of(2017, 12, 31), 0.50);
-        PeriodeValue b = new PeriodeValue(LocalDate.of(2018, 1, 1), LocalDate.of(2019, 12, 31), 0.50);
+        PeriodeValue b = new PeriodeValue(LocalDate.of(2017, 12, 31), LocalDate.of(2019, 12, 31), 0.50);
         PeriodeValue c = new PeriodeValue(LocalDate.of(2020, 1, 2), LocalDate.of(2020, 12, 31), 0.35);
-        PeriodeValue d = new PeriodeValue(LocalDate.of(2021, 1, 1), LocalDate.of(2021, 12, 31), 0.15);
+        PeriodeValue d = new PeriodeValue(LocalDate.of(2020, 12, 31), LocalDate.of(2021, 12, 31), 0.15);
         List<PeriodeValue> periods = new ArrayList<>();
         periods.add( a);
         periods.add( b);
@@ -502,7 +502,7 @@ public class PeriodeCumulativeTest {
 
         PeriodeValue a = new PeriodeValue(LocalDate.of(2015, 1, 1), LocalDate.of(2017, 12, 31), 0.50);
         PeriodeValue b = new PeriodeValue(LocalDate.of(2018, 1, 2), LocalDate.of(2019, 12, 31), 0.50);
-        PeriodeValue c = new PeriodeValue(LocalDate.of(2020, 1, 1), LocalDate.of(2020, 12, 31), 0.50);
+        PeriodeValue c = new PeriodeValue(LocalDate.of(2019, 12, 31), LocalDate.of(2020, 12, 31), 0.50);
         PeriodeValue d = new PeriodeValue(LocalDate.of(2021, 1, 2), LocalDate.of(2021, 12, 31), 0.15);
         List<PeriodeValue> periods = new ArrayList<>();
         periods.add( a);
@@ -547,9 +547,9 @@ public class PeriodeCumulativeTest {
     public void testMergeSubsequentPeriodsOneAndTwoEqualAndValueEqualAndThreeAndFourDatesEqualAndValueEqual() {
 
         PeriodeValue a = new PeriodeValue(LocalDate.of(2015, 1, 1), LocalDate.of(2017, 12, 31), 0.50);
-        PeriodeValue b = new PeriodeValue(LocalDate.of(2018, 1, 1), LocalDate.of(2019, 12, 31), 0.50);
-        PeriodeValue c = new PeriodeValue(LocalDate.of(2020, 1, 1), LocalDate.of(2020, 12, 31), 0.15);
-        PeriodeValue d = new PeriodeValue(LocalDate.of(2021, 1, 1), LocalDate.of(2021, 12, 31), 0.15);
+        PeriodeValue b = new PeriodeValue(LocalDate.of(2017, 12, 31), LocalDate.of(2019, 12, 31), 0.50);
+        PeriodeValue c = new PeriodeValue(LocalDate.of(2019, 12, 31), LocalDate.of(2020, 12, 31), 0.15);
+        PeriodeValue d = new PeriodeValue(LocalDate.of(2020, 12, 31), LocalDate.of(2021, 12, 31), 0.15);
         List<PeriodeValue> periods = new ArrayList<>();
         periods.add( a);
         periods.add( b);
@@ -586,7 +586,7 @@ public class PeriodeCumulativeTest {
     }
     
     @Test
-    public void testMergeSubsequentPeriodsAllSubsequent() {
+    public void testMergeSubsequentPeriodsAllSubsequentNextDay() {
 
         PeriodeValue a = new PeriodeValue(LocalDate.of(2015, 1, 1), LocalDate.of(2017, 12, 31), 0.50);
         PeriodeValue b = new PeriodeValue(LocalDate.of(2018, 1, 1), LocalDate.of(2019, 12, 31), 0.50);
@@ -606,10 +606,7 @@ public class PeriodeCumulativeTest {
         System.out.println( "Merged result: ");
         mergedPeriods.forEach( p -> System.out.println( p));
         
-      assertEquals( 1, mergedPeriods.size());
-      assertEquals( mergedPeriods.get( 0).value, a.value, 0.50);
-      assertTrue( mergedPeriods.get( 0).start.isEqual( cumulatedPeriods.get(0).start));
-      assertTrue( mergedPeriods.get( 0).einde.isEqual( cumulatedPeriods.get(3).einde));
+      assertEquals( 4, mergedPeriods.size());
 
       /*
 			Cumulated result: 
@@ -619,7 +616,49 @@ public class PeriodeCumulativeTest {
 			PeriodeValue{start=01-01-2021, einde=31-12-2021, value=0.5}
 			
 			Merged result: 
-			PeriodeValue{start=01-01-2015, einde=31-12-2021, value=0.5}
+			PeriodeValue{start=01-01-2015, einde=31-12-2017, value=0.5}
+			PeriodeValue{start=01-01-2018, einde=31-12-2019, value=0.5}
+			PeriodeValue{start=01-01-2020, einde=31-12-2020, value=0.5}
+			PeriodeValue{start=01-01-2021, einde=31-12-2021, value=0.5}
+     */
+    }
+    
+    @Test
+    public void testMergeSubsequentPeriodsAllSubsequentSameDay() {
+
+        PeriodeValue a = new PeriodeValue(LocalDate.of(2015, 1, 1), LocalDate.of(2017, 12, 31), 0.50);
+        PeriodeValue b = new PeriodeValue(LocalDate.of(2017, 12, 31), LocalDate.of(2019, 12, 31), 0.50);
+        PeriodeValue c = new PeriodeValue(LocalDate.of(2019, 12, 31), LocalDate.of(2020, 12, 31), 0.50);
+        PeriodeValue d = new PeriodeValue(LocalDate.of(2020, 12, 31), LocalDate.of(2021, 12, 31), 0.50);
+        List<PeriodeValue> periods = new ArrayList<>();
+        periods.add( a);
+        periods.add( b);
+        periods.add( c);
+        periods.add( d);
+        periods.forEach( p -> System.out.println( p));
+        List<PeriodeValue> cumulatedPeriods = getPeriodCumulatives( periods);
+        System.out.println( "Cumulated result: ");
+        cumulatedPeriods.forEach( p -> System.out.println( p));
+        
+        List<PeriodeValue> mergedPeriods = getPeriodesMerged(cumulatedPeriods);
+        System.out.println( "Merged result: ");
+        mergedPeriods.forEach( p -> System.out.println( p));
+        
+        assertEquals( 1, mergedPeriods.size());
+        assertEquals( mergedPeriods.get( 0).einde, cumulatedPeriods.get(3).einde);
+
+      /*
+			Cumulated result: 
+			PeriodeValue{start=01-01-2015, einde=31-12-2017, value=0.5}
+			PeriodeValue{start=01-01-2018, einde=31-12-2019, value=0.5}
+			PeriodeValue{start=01-01-2020, einde=31-12-2020, value=0.5}
+			PeriodeValue{start=01-01-2021, einde=31-12-2021, value=0.5}
+			
+			Merged result: 
+			PeriodeValue{start=01-01-2015, einde=31-12-2017, value=0.5}
+			PeriodeValue{start=01-01-2018, einde=31-12-2019, value=0.5}
+			PeriodeValue{start=01-01-2020, einde=31-12-2020, value=0.5}
+			PeriodeValue{start=01-01-2021, einde=31-12-2021, value=0.5}
      */
     }
     

@@ -435,7 +435,7 @@ public class PeriodeValueTest {
 	public void testIsSubsequentPeriodNextDay() {
 		PeriodeValue a = new PeriodeValue(LocalDate.of(2016, 1, 1), LocalDate.of(2017, 12, 31), 33);
 		PeriodeValue b = new PeriodeValue(LocalDate.of(2018, 1, 1), LocalDate.of(2018, 12, 31), 33);
-		assertTrue(a.hasSubsequentPeriod(b));
+		assertFalse(a.hasSubsequentPeriod(b));
 	}
 
 	@Test
@@ -462,7 +462,7 @@ public class PeriodeValueTest {
 		PeriodeValue c = a.merge(b);
 		System.out.println("After: " + c);
 
-		assertTrue(c.einde.isEqual(b.einde));
+		assertFalse(c.einde.isEqual(b.einde));
 
 	}
 

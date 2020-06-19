@@ -106,9 +106,7 @@ public class PeriodeValue {
 //				other.start, this.value, other.value, (this.einde.plusDays(1).isEqual(other.start)),
 //				((this.einde.plusDays(1).isEqual(other.start)) && (Math.abs(this.value - other.value) < 0.001))));
 		if (
-				( (this.einde.isEqual(other.start)) || (this.einde.plusDays(1).isEqual(other.start) )
-						) 
-				&& (Math.abs(this.value - other.value) < 0.001)) {
+				 (this.einde.isEqual(other.start)) && (Math.abs(this.value - other.value) < 0.001)) {
 			return true;
 		}
 
